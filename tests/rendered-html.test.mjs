@@ -26,6 +26,10 @@ test("server-renders Koushik's portfolio", async () => {
   assert.match(html, /CodeOrbit/);
   assert.match(html, /SynapseMesh/);
   assert.match(html, /Switch to Sasuke dark mode/);
+  assert.match(html, /Amazon/);
+  assert.match(html, /Machine Learning Summer School/);
+  assert.match(html, /Cybersecurity Professional Certificate/);
+  assert.match(html, /Machine Learning Specialization/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
 
@@ -34,7 +38,7 @@ test("ships the required portfolio assets and metadata", async () => {
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
-    readFile(new URL("../public/assets/koushik-cutout.png", import.meta.url)),
+    readFile(new URL("../public/assets/koushik-pose-v2.png", import.meta.url)),
     access(new URL("../public/assets/naruto-hover.png", import.meta.url)),
     access(new URL("../public/assets/sasuke-hover.png", import.meta.url)),
     access(new URL("../public/Koushik-Kotte-Resume.pdf", import.meta.url)),
