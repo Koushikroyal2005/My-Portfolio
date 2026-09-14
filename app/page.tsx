@@ -45,8 +45,28 @@ return <main className={"site "+(ready?"ready":"")}><div className="boot"><div c
 function Heading({kicker,title,text}:{kicker:string,title:React.ReactNode,text?:string}){return <div className="section-heading reveal"><div><span>{kicker}</span><h2>{title}</h2></div>{text&&<p>{text}</p>}</div>}
 function Role({number,date,location,role,company,unit,summary,items,metrics,stack}:{number:string,date:string,location:string,role:string,company:string,unit:string,summary:string,items:string[][],metrics:string[][],stack:string}){return <article className="role-card reveal"><div className="role-meta"><span>{date}</span><small>{location}</small><b>{number}</b></div><div className="role-body"><span>{role}</span><h3>{company} <em>· {unit}</em></h3><p className="role-summary">{summary}</p><div className="impact-grid">{items.map(([t,p])=><div className="impact-item" key={t}><i/><div><b>{t}</b><p>{highlightMetrics(p)}</p></div></div>)}</div><div className="role-metrics"><span>{company.toUpperCase()} IMPACT</span>{metrics.map(([value,label])=><div key={label}><b>{value}</b><small>{label}</small></div>)}</div><small className="stack">{stack}</small></div></article>}
 function highlightMetrics(text:string){return text.split(/(\d+(?:[.,–-]\d+)*(?:\+|%|x)?(?:\s*(?:FPS|logs\/second|minutes?|services?|APIs?|features?|test cases?|scenarios?|patterns?))?)/gi).map((part,i)=>/\d/.test(part)?<mark className="metric-highlight" key={i}>{part}</mark>:part)}
+type BrushPoint={x:number;y:number;t:number};
 function TrailReveal({src}:{src:string}){
-const revealRef=useRef<HTMLDivElement>(null),dark=src.includes("sasuke");
-useEffect(()=>{if(revealRef.current)revealRef.current.dataset.active="false"},[src]);
-const move=(e:React.PointerEvent<HTMLDivElement>)=>{const r=e.currentTarget.getBoundingClientRect();e.currentTarget.style.setProperty("--reveal-x",(e.clientX-r.left)+"px");e.currentTarget.style.setProperty("--reveal-y",(e.clientY-r.top)+"px");e.currentTarget.dataset.active="true"};
-return <div ref={revealRef} className="trail-reveal" data-active="false" onPointerEnter={move} onPointerMove={move} onPointerLeave={e=>e.currentTarget.dataset.active="false"} aria-hidden="true"><img className={!dark?"active":""} src="/assets/naruto-aligned-v3.png" alt=""/><img className={dark?"active":""} src="/assets/sasuke-aligned-v3.png" alt=""/></div>}
+const canvasRef=useRef<HTMLCanvasElement>(null),maskRef=useRef<HTMLCanvasElement|null>(null),pointsRef=useRef<BrushPoint[]>([]),lastRef=useRef<BrushPoint|null>(null),srcRef=useRef(src),imagesRef=useRef<Record<string,HTMLImageElement>>({});
+useEffect(()=>{srcRef.current=src;pointsRef.current=[];lastRef.current=null;const canvas=canvasRef.current;if(canvas)canvas.getContext("2d")?.clearRect(0,0,canvas.width,canvas.height);if(maskRef.current)maskRef.current.getContext("2d")?.clearRect(0,0,maskRef.current.width,maskRef.current.height)},[src]);
+useEffect(()=>{
+const canvas=canvasRef.current;if(!canvas)return;
+const mask=document.createElement("canvas");maskRef.current=mask;
+for(const [key,url] of Object.entries({naruto:"/assets/naruto-aligned-v3.png",sasuke:"/assets/sasuke-aligned-v3.png"})){const image=new Image();image.src=url;imagesRef.current[key]=image}
+let frame=0;
+const draw=(now:number)=>{
+const rect=canvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2),w=Math.max(1,Math.round(rect.width*dpr)),h=Math.max(1,Math.round(rect.height*dpr));
+if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;mask.width=w;mask.height=h;pointsRef.current=[];lastRef.current=null}
+const ctx=canvas.getContext("2d"),brush=mask.getContext("2d");if(!ctx||!brush){frame=requestAnimationFrame(draw);return}
+const life=1150;pointsRef.current=pointsRef.current.filter(point=>now-point.t<life);
+brush.clearRect(0,0,w,h);brush.lineCap="round";brush.lineJoin="round";
+const points=pointsRef.current;
+if(points.length===1){const alpha=Math.max(0,1-(now-points[0].t)/life);brush.globalAlpha=alpha;brush.fillStyle="#fff";brush.beginPath();brush.arc(points[0].x*dpr,points[0].y*dpr,48*dpr,0,Math.PI*2);brush.fill()}
+for(let i=1;i<points.length;i++){const a=points[i-1],b=points[i],alpha=Math.max(0,1-(now-b.t)/life);brush.strokeStyle="#fff";brush.globalAlpha=alpha*.28;brush.lineWidth=118*dpr;brush.beginPath();brush.moveTo(a.x*dpr,a.y*dpr);brush.lineTo(b.x*dpr,b.y*dpr);brush.stroke();brush.globalAlpha=alpha;brush.lineWidth=88*dpr;brush.beginPath();brush.moveTo(a.x*dpr,a.y*dpr);brush.lineTo(b.x*dpr,b.y*dpr);brush.stroke()}
+brush.globalAlpha=1;ctx.clearRect(0,0,w,h);
+const key=srcRef.current.includes("sasuke")?"sasuke":"naruto",image=imagesRef.current[key];
+if(image?.complete&&image.naturalWidth){const scale=Math.max(w/image.naturalWidth,h/image.naturalHeight),dw=image.naturalWidth*scale,dh=image.naturalHeight*scale;ctx.globalCompositeOperation="source-over";ctx.drawImage(image,(w-dw)/2,0,dw,dh);ctx.globalCompositeOperation="destination-in";ctx.drawImage(mask,0,0);ctx.globalCompositeOperation="source-over"}
+frame=requestAnimationFrame(draw)};
+frame=requestAnimationFrame(draw);return()=>cancelAnimationFrame(frame)},[]);
+const paint=(e:React.PointerEvent<HTMLCanvasElement>)=>{const rect=e.currentTarget.getBoundingClientRect(),now=performance.now(),next={x:e.clientX-rect.left,y:e.clientY-rect.top,t:now},last=lastRef.current;if(last){const distance=Math.hypot(next.x-last.x,next.y-last.y),steps=Math.max(1,Math.ceil(distance/12));for(let i=1;i<=steps;i++){const mix=i/steps;pointsRef.current.push({x:last.x+(next.x-last.x)*mix,y:last.y+(next.y-last.y)*mix,t:now})}}else pointsRef.current.push(next);if(pointsRef.current.length>110)pointsRef.current.splice(0,pointsRef.current.length-110);lastRef.current=next};
+return <canvas ref={canvasRef} className="trail-canvas brush-trail" onPointerEnter={paint} onPointerMove={paint} onPointerLeave={()=>{lastRef.current=null}} aria-hidden="true"/>}

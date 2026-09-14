@@ -65,9 +65,11 @@ test("ships the required portfolio assets and metadata", async () => {
   assert.match(css, /konoha-panorama-v3\.png/);
   assert.match(css, /uchiha-chamber-v3\.png/);
   assert.match(page, /TrailReveal/);
-  assert.match(page, /trail-reveal/);
+  assert.match(page, /brush-trail/);
+  assert.match(page, /destination-in/);
+  assert.match(page, /const life=1150/);
   assert.match(page, /leaf-cursor-v4\.png/);
-  assert.match(css, /\.trail-reveal\[data-active="true"\] img\.active/);
+  assert.match(css, /\.brush-trail\{cursor:none;will-change:contents\}/);
   assert.match(css, /\.leaf-cursor>span\{display:none!important\}/);
   assert.match(layout, /AI Engineer & Full-Stack Developer/);
   assert.match(layout, /openGraph/);

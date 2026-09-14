@@ -23,6 +23,7 @@
 @media(max-width:620px){.nav-shell{height:68px;padding:0 16px}.brand b{display:none}.theme-control button span{display:none}.hero{padding:100px 16px 55px}.hero h1{font-size:25vw}.hero-intro{font-size:14px}.hero-proof{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.hero-proof b{font-size:22px}.hero-links{flex-direction:column}.hero-visual{height:545px;min-height:0;margin-top:35px}.portrait{width:88%;height:500px}.guardian{width:135%;height:120%;right:-17%}.orbital-note{right:0}.chapter{padding:90px 16px}.chapter-label{display:none}.section-heading h2{font-size:16vw}.project-grid{display:block}.project{min-height:430px;margin-bottom:15px}.project-copy{padding-right:0!important}.project-actions{position:static;margin-top:18px}.role-card{grid-template-columns:1fr;padding:38px 0}.role-meta b{display:none}.role-body{margin-top:20px}.impact-grid{grid-template-columns:1fr}.mini-dashboard{padding:20px}.scene-divider p{max-width:68%;text-align:center}.skill-constellation,.cert-grid,.coding-record,.education{grid-template-columns:1fr}.coding-record,.education{gap:18px}.education>div{border-top:1px solid var(--line);padding-top:14px}.contact h2{font-size:17vw}.contact>a{font-size:7px}.socials{flex-wrap:wrap;justify-content:center}footer{flex-direction:column;align-items:center;gap:14px}.face-target{width:64%;height:43%}}
 .leaf-cursor i{animation:none;transform:rotate(-8deg)}
 .trail-canvas{position:absolute;z-index:4;inset:0;width:100%;height:100%;touch-action:none;filter:saturate(1.12) contrast(1.04)}
+.brush-trail{cursor:none;will-change:contents}
 .trail-hint{position:absolute;z-index:7;left:50%;bottom:15px;transform:translateX(-50%);width:max-content;max-width:90%;padding:7px 10px;background:rgba(0,0,0,.7);color:white;font:500 8px "DM Mono";letter-spacing:.11em;pointer-events:none;transition:opacity .25s}
 .portrait:hover .trail-hint{opacity:.35}
 @media(max-width:620px){.trail-hint{font-size:7px}}
@@ -56,8 +57,5 @@
 .leaf-cursor>span:after{content:"";position:absolute;left:4px;top:7px;width:33px;height:2px;border-radius:3px;background:#a78dff;box-shadow:0 0 5px #6b44ff}
 [data-theme="sasuke"] .leaf-cursor>span{opacity:1}
 .leaf-cursor>span{display:none!important}
-.trail-reveal{--reveal-x:50%;--reveal-y:36%;position:absolute;z-index:4;inset:0;width:100%;height:100%;touch-action:none}
-.trail-reveal img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0;clip-path:circle(150px at var(--reveal-x) var(--reveal-y));filter:saturate(1.1) contrast(1.04);transition:opacity .1s linear;pointer-events:none}
-.trail-reveal[data-active="true"] img.active{opacity:1}
 .portrait:hover .trail-hint{opacity:.18}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.boot{display:none}.reveal{opacity:1;transform:none}}
