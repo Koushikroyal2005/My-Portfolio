@@ -60,12 +60,4 @@
 .trail-reveal img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0;clip-path:circle(150px at var(--reveal-x) var(--reveal-y));filter:saturate(1.1) contrast(1.04);transition:opacity .1s linear;pointer-events:none}
 .trail-reveal[data-active="true"] img.active{opacity:1}
 .portrait:hover .trail-hint{opacity:.18}
-.portrait{border-radius:0;background:transparent;box-shadow:none}
-.portrait:after{display:none}
-.trail-connected{will-change:contents}
-.hero-visual:before{content:"";position:absolute;z-index:9;right:-2%;top:4%;width:clamp(170px,18vw,250px);aspect-ratio:3/2;background:url("/assets/rasenshuriken-v1.png") center/contain no-repeat;pointer-events:none;filter:drop-shadow(0 0 12px #76dfff) drop-shadow(0 0 28px rgba(43,174,255,.72));transform-origin:58% 50%;animation:rasenshuriken-flight 2.1s ease-in-out infinite}
-[data-theme="sasuke"] .hero-visual:before{background-image:url("/assets/chidori-stream-v1.png");filter:drop-shadow(0 0 9px #d9efff) drop-shadow(0 0 26px rgba(76,104,255,.9));animation:chidori-thrust 1.15s steps(2,end) infinite}
-@keyframes rasenshuriken-flight{0%,100%{transform:translateX(-8px) rotate(0) scale(.94);opacity:.82}45%{transform:translateX(5px) rotate(170deg) scale(1.04);opacity:1}55%{transform:translateX(5px) rotate(205deg) scale(1.04);opacity:1}}
-@keyframes chidori-thrust{0%,100%{transform:translateX(-10px) scale(.96);opacity:.78}35%{transform:translate(3px,-2px) scale(1.06);opacity:1}55%{transform:translate(8px,1px) scale(1.02);opacity:.9}72%{transform:translate(1px,-1px) scale(1.08);opacity:1}}
-@media(max-width:620px){.hero-visual:before{right:0;top:2%;width:140px}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.boot{display:none}.reveal{opacity:1;transform:none}}
