@@ -30,6 +30,9 @@ test("server-renders Koushik's portfolio", async () => {
   assert.match(html, /Machine Learning Summer School/);
   assert.match(html, /Cybersecurity Professional Certificate/);
   assert.match(html, /Machine Learning Specialization/);
+  assert.match(html, /600 → 7K/);
+  assert.match(html, /30 → 5 MIN/);
+  assert.match(html, /300-400 tests across five microservices/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
 
@@ -39,15 +42,21 @@ test("ships the required portfolio assets and metadata", async () => {
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../public/assets/koushik-pose-v2.png", import.meta.url)),
-    access(new URL("../public/assets/naruto-hover.png", import.meta.url)),
-    access(new URL("../public/assets/sasuke-hover.png", import.meta.url)),
+    access(new URL("../public/assets/naruto-aligned-v3.png", import.meta.url)),
+    access(new URL("../public/assets/sasuke-aligned-v3.png", import.meta.url)),
+    access(new URL("../public/assets/konoha-panorama-v3.png", import.meta.url)),
+    access(new URL("../public/assets/uchiha-chamber-v3.png", import.meta.url)),
+    access(new URL("../public/assets/kurama-guardian-v3.png", import.meta.url)),
+    access(new URL("../public/assets/susanoo-guardian-v3.png", import.meta.url)),
+    access(new URL("../.claude/skills.md", import.meta.url)),
     access(new URL("../public/Koushik-Kotte-Resume.pdf", import.meta.url)),
     access(new URL("../public/og.png", import.meta.url)),
   ]);
   assert.ok(portrait.length > 100_000);
   assert.match(page, /localStorage\.setItem\("portfolio-theme"/);
-  assert.match(css, /naruto-hover\.png/);
-  assert.match(css, /sasuke-hover\.png/);
+  assert.match(css, /konoha-panorama-v3\.png/);
+  assert.match(css, /uchiha-chamber-v3\.png/);
+  assert.match(page, /faceActive/);
   assert.match(layout, /AI Engineer & Full-Stack Developer/);
   assert.match(layout, /openGraph/);
 });
