@@ -8,10 +8,10 @@ Use this file as the canonical brief and content source for every portfolio edit
 - Light mode: warm parchment, Konoha skyline, ramen-shop warmth, leaf motifs, Naruto/Kurama energy, orange chakra.
 - Dark mode: Uchiha stone chamber, moonlit indigo, Akatsuki cloud accents, Sasuke/Susanoo energy, electric blue and violet chakra.
 - Theme switching must transform backgrounds, creature motifs, cursor, effects, labels, and scene atmosphere - not only colors.
-- Use the Leaf Village emblem as the desktop cursor. Its outer ring rotates; the center remains readable.
+- Use the Leaf Village forehead-protector emblem as the desktop cursor. It must remain upright and must never rotate.
 - Use kunai as bullet markers and a spinning shuriken as the visual transition between major chapters.
 - Use frogs subtly in light mode and snakes subtly in dark mode.
-- Hero portrait: Koushik looking directly at the viewer, arms crossed, in the exact same centered pose/framing as the character layer. On hover over Koushik's face only, reveal Naruto's face in light mode or Sasuke's face in dark mode. The anime face must be clearly visible and tightly aligned; do not overlay an unrelated full scene.
+- Hero portrait: Koushik looking directly at the viewer, arms crossed, with Naruto and Sasuke layers sharing the same centered pose and framing. Cursor movement over the portrait must reveal the complete alternate character and its background through a soft motion trail. Fresh trail areas open under the cursor while older areas smoothly close and refill with Koushik's original portrait. The reveal is not limited to the face and must not be a fixed circular lens.
 - Kurama and Susanoo must appear as large, unmistakable atmospheric guardians behind/around the hero or chapter transition, not as text labels.
 - Motion: smooth scene reveals, depth/parallax, chakra particles, cloud drift, scroll progress, character face reveal, shuriken transition, and restrained hover microinteractions. Respect prefers-reduced-motion.
 - Copy tone: professional, specific, restrained. Avoid generic anime dialogue, ranks, filler slogans, or roleplay language that could distract recruiters.

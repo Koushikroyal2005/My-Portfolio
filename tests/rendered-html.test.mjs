@@ -56,7 +56,9 @@ test("ships the required portfolio assets and metadata", async () => {
   assert.match(page, /localStorage\.setItem\("portfolio-theme"/);
   assert.match(css, /konoha-panorama-v3\.png/);
   assert.match(css, /uchiha-chamber-v3\.png/);
-  assert.match(page, /faceActive/);
+  assert.match(page, /TrailReveal/);
+  assert.match(page, /destination-in/);
+  assert.match(css, /\.leaf-cursor i\{animation:none/);
   assert.match(layout, /AI Engineer & Full-Stack Developer/);
   assert.match(layout, /openGraph/);
 });
