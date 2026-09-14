@@ -1,72 +1,75 @@
 "use client";
-import {useEffect,useRef,useState} from "react";
-type Theme="naruto"|"sasuke";
-const projects=[
-{key:"rag",no:"01",kind:"AI KNOWLEDGE",title:"Multi-Document RAG",hook:"Many documents. One grounded answer.",text:"Retrieval, reranking, and context-aware generation that keeps answers connected to source material.",tech:"Python · RAG · Vector Search · LLMs",url:"https://github.com/Koushikroyal2005?tab=repositories&q=rag",glyph:"文"},
-{key:"trade",no:"02",kind:"AGENTIC AI / FINTECH",title:"Trading Agent",hook:"Research signals without removing guardrails.",text:"An agentic workflow for market research, signal evaluation, and controlled decision support.",tech:"Python · Agents · Market Data · Automation",url:"https://github.com/Koushikroyal2005?tab=repositories&q=trading",glyph:"市"},
-{key:"guard",no:"03",kind:"VISION / SAFETY",title:"OEguard",hook:"Attention-aware safety that resists shortcuts.",text:"A child screen-time guardian running at 10-15 FPS with gaze analysis, anti-cheat safeguards, incident memory, offline fallback, and 111 automated tests.",tech:"OpenCV · MediaPipe · Gemini · ChromaDB",url:"https://github.com/Koushikroyal2005/OEguard",glyph:"眼"},
-{key:"calorie",no:"04",kind:"AI / HEALTH",title:"Personal Calorie Tracker",hook:"Daily nutrition, easier to understand.",text:"An AI-assisted companion for food logging, useful summaries, and clear progress awareness.",tech:"Full Stack · AI · Analytics · UX",url:"https://github.com/Koushikroyal2005?tab=repositories&q=calorie",glyph:"食"},
-{key:"orbit",no:"05",kind:"FULL STACK / DEVTOOLS",title:"CodeOrbit",hook:"Turn coding data into a practice plan.",text:"Live Codeforces analytics, 40+ tag filters, rating-range discovery, bookmarks, solved-state tracking, and cached AI problem-of-the-day recommendations.",tech:"React · Node.js · MongoDB · Codeforces API",url:"https://github.com/Koushikroyal2005/code_orbit",live:"https://code-orbit-scj0.onrender.com",glyph:"軌"},
-{key:"mesh",no:"06",kind:"WEB3 / AI INFRA",title:"SynapseMesh",hook:"Agents with verifiable coordination.",text:"Trustless agent execution through onchain task DAGs, TEE verification, and atomic settlement on 0G.",tech:"React · Solidity · Ethers · Python",url:"https://github.com/Koushikroyal2005?tab=repositories&q=SynapseMesh",live:"https://synapsemesh.vercel.app",glyph:"網"}];
-const myntra=[
-["INTEGRATION TESTING","Built an integration-testing tool that automated 300-400 test cases across 10 services and scheduled daily cron runs, reducing PBS manual testing from multiple days to about 5 minutes."],
-["DEFECT RESOLUTION","Diagnosed and fixed margin-check and IBIS validation defects across two services, preventing purchase-order failures and making the automated integration flow reliable."],
-["LOGGING PIPELINE","Raised logging capacity from roughly 600 to 7,000 logs/second across seven services using Log4j2 and a custom LMAX Disruptor ring buffer, while lowering request latency by up to 10%."],
-["INCIDENT RESPONSE","Cut incident detection from about 30 minutes to 5 minutes and reduced on-call escalations by 40% with Grafana/Prometheus dashboards covering roughly 20 external APIs."],
-["CACHE OPERATIONS","Reduced IBIS/Hydra cache latency by 90-95% through an in-memory migration; built parallel Redis-key cleanup in Bash that completes in under one minute."],
-["DELIVERY","Shipped eight production features through reviewed, specification-driven workflows using GitHub Spec-Kit and agentic AI."]];
-const handshake=[
-["SCENARIO DESIGN","Created 10+ terminal-based debugging, repository-repair, and multi-step scenarios to test AI-agent reasoning and code execution."],
-["FAILURE ANALYSIS","Evaluated 20+ recurring AI failure patterns and delivered structured feedback for stronger, fairer software-engineering benchmarks."],
-["QUALITY ITERATION","Improved verifier behavior, instruction clarity, and task difficulty through multiple review cycles to increase benchmark acceptance readiness."],
-["ACCEPTANCE READINESS","Separated task-authoring defects from genuine model failures and documented actionable corrections for each review cycle."]];
-const certs=[
-["Amazon","Machine Learning Summer School","Top 3% · 2025"],["Google","Cybersecurity Professional Certificate","Coursera"],["Google","Gemini for Developers","Generative AI"],["Google","Code Vipassana: AI Agents","Workshop"],["Stanford / Coursera","Machine Learning Specialization","ML foundations"],["IBM","Linux Commands & Shell Scripting","Coursera"],["Udemy","Full-Stack Web Development","Web engineering"]];
-export default function Home(){
-const[theme,setTheme]=useState<Theme>("naruto"),[ready,setReady]=useState(false),[switching,setSwitching]=useState(false);
-const cursorRef=useRef<HTMLDivElement>(null),dark=theme==="sasuke";
-useEffect(()=>{setTheme(localStorage.getItem("portfolio-theme")==="sasuke"?"sasuke":"naruto");const timer=setTimeout(()=>setReady(true),650);
-const move=(e:PointerEvent)=>{cursorRef.current?.style.setProperty("--cx",e.clientX+"px");cursorRef.current?.style.setProperty("--cy",e.clientY+"px");document.documentElement.style.setProperty("--px",String(e.clientX/innerWidth-.5));document.documentElement.style.setProperty("--py",String(e.clientY/innerHeight-.5))};
-const scroll=()=>document.documentElement.style.setProperty("--progress",String(scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight)));
-const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add("in-view")),{threshold:.12});document.querySelectorAll(".reveal").forEach(e=>io.observe(e));addEventListener("pointermove",move);addEventListener("scroll",scroll,{passive:true});scroll();return()=>{clearTimeout(timer);io.disconnect();removeEventListener("pointermove",move);removeEventListener("scroll",scroll)}},[]);
-useEffect(()=>{document.documentElement.dataset.theme=theme;localStorage.setItem("portfolio-theme",theme)},[theme]);
-const change=(next:Theme)=>{if(next===theme)return;setSwitching(true);setTimeout(()=>setTheme(next),260);setTimeout(()=>setSwitching(false),850)};
-return <main className={"site "+(ready?"ready":"")}><div className="boot"><div className="boot-mark"><i/><b>{dark?"雷":"火"}</b></div><span>LOADING FIELD NOTES</span></div><div className={"theme-strike "+(switching?"active":"")}><i/><b>{dark?"火":"雷"}</b></div><div className="grain"/><div className="progress"/><div className="leaf-cursor" ref={cursorRef}><img src="/assets/leaf-cursor-v4.png" alt=""/><span/></div>
-<header className="nav-shell"><a className="brand" href="#top"><span>K</span><b>KOUSHIK KOTTE</b></a><nav><a href="#work">WORK</a><a href="#experience">EXPERIENCE</a><a href="#skills">SKILLS</a><a href="#credentials">CERTIFICATIONS</a><a href="#contact">CONTACT</a></nav><div className="theme-control" aria-label="Choose portfolio theme"><button className={!dark?"on":""} onClick={()=>change("naruto")} aria-label="Switch to Naruto light mode">火 <span>LIGHT</span></button><button className={dark?"on":""} onClick={()=>change("sasuke")} aria-label="Switch to Sasuke dark mode">雷 <span>DARK</span></button></div></header>
-<section className="hero" id="top"><div className="world-bg"/><div className="cloud cloud-a"/><div className="cloud cloud-b"/><div className="hero-copy"><span className="eyebrow"><i/> SOFTWARE ENGINEER · AI BUILDER</span><h1>Koushik<br/><em>Kotte.</em></h1><p className="hero-intro">I turn ambiguous engineering problems into dependable AI products and backend systems—across agentic AI, RAG, computer vision, observability, and developer tools.</p><div className="hero-proof"><span><b>8.51</b>NIT RAIPUR CGPA</span><span><b>1,500+</b>PROBLEMS SOLVED</span><span><b>8</b>FEATURES SHIPPED</span></div><div className="hero-links"><a className="primary" href="#work">EXPLORE THE WORK <b>↗</b></a><a href="/Koushik-Kotte-Resume.pdf" download>DOWNLOAD RÉSUMÉ ↓</a></div></div>
-<div className="hero-visual"><img className="guardian" src={dark?"/assets/susanoo-guardian-v3.png":"/assets/kurama-guardian-v4.png"} alt=""/><div className="portrait"><img className="portrait-base" src="/assets/koushik-pose-v2.png" alt="Koushik Kotte"/><TrailReveal src={dark?"/assets/sasuke-aligned-v3.png":"/assets/naruto-aligned-v3.png"}/><div className="trail-hint">MOVE ACROSS THE PORTRAIT · REVEAL {dark?"SASUKE":"NARUTO"}</div></div><div className="orbital-note"><b>{dark?"SUSANOO":"KURAMA"}</b><span>{dark?"FOCUS · PRECISION":"ENERGY · RESILIENCE"}</span></div></div><div className="hero-foot"><span>RAIPUR, INDIA</span><i/><span>AVAILABLE FOR SOFTWARE & AI ROLES</span><b>SCROLL ↓</b></div></section>
-<section className="signal-strip" aria-label="Engineering skills"><div>{[0,1].map(copy=><div className="signal-sequence" aria-hidden={copy===1} key={copy}><span>JAVA / SPRING BOOT</span><b>◆</b><span>AGENTIC AI</span><b>◆</b><span>DISTRIBUTED SYSTEMS</span><b>◆</b><span>COMPUTER VISION</span><b>◆</b><span>RAG</span><b>◆</b><span>OBSERVABILITY</span><b>◆</b></div>)}</div></section>
-<section className="chapter work" id="work"><div className="chapter-label">01 / SELECTED BUILDS</div><Heading kicker="QUESTIONS TURNED INTO PRODUCTS" title={<>Work that moves<br/><em>beyond the demo.</em></>} text="Six projects, each solving a different kind of problem. Hover to open the technical layer."/><div className="project-grid">{projects.map(p=><article className={"project project-"+p.key+" reveal"} key={p.key}><div className="project-top"><span>{p.no} / {p.kind}</span><b>{p.glyph}</b></div><div className="project-widget"><i/><i/><i/><b/></div><div className="project-copy"><h3>{p.title}</h3><strong>{p.hook}</strong><p>{p.text}</p><small>{p.tech}</small></div><div className="project-actions"><a href={p.url} target="_blank" rel="noreferrer">SOURCE ↗</a>{p.live&&<a href={p.live} target="_blank" rel="noreferrer">LIVE ↗</a>}</div></article>)}</div></section>
-<div className="scene-divider reveal"><div className="flight-line"/><div className="flying-shuriken"><i/><i/><i/><i/><b/></div><p>{dark?"DISCIPLINE TURNS COMPLEXITY INTO CONTROL":"CURIOSITY TURNS PROBLEMS INTO SYSTEMS"}</p></div>
-<section className="chapter experience" id="experience"><div className="chapter-label">02 / EXPERIENCE</div><Heading kicker="PRODUCTION FIELD RECORD" title={<>What changed<br/><em>because I built it.</em></>} text="Every metric is tied to its system, scope, baseline, and engineering method."/><Role number="01" date="JAN—JUN 2026" location="BANGALORE · ONSITE" role="SOFTWARE DEVELOPMENT ENGINEER INTERN" company="Myntra" unit="Flipkart Group" summary="Production engineering across testing automation, high-throughput logging, incident detection, caching, and delivery workflows." items={myntra} metrics={[["300–400","TESTS · 10 SERVICES"],["600 → 7K","LOGS / SECOND"],["30 → 5 MIN","INCIDENT DETECTION"],["90–95%","CACHE LATENCY CUT"]]} stack="JAVA · SPRING BOOT · LOG4J2 · KAFKA · REDIS · GRAFANA · PROMETHEUS · MONGODB · SQL · BASH · ELASTICSEARCH"/><Role number="02" date="JUL—AUG 2026" location="REMOTE · SAN FRANCISCO" role="AI EVALUATION SPECIALIST" company="Handshake" unit="Project Dynamo" summary="Designed and evaluated difficult software-engineering tasks that expose where coding agents fail—and how benchmarks can measure them fairly." items={handshake} metrics={[["10+","EVALUATION SCENARIOS"],["20+","FAILURE PATTERNS"],["3","QUALITY AXES"],["MULTI-STEP","REASONING DEPTH"]]} stack="GITHUB CLI · GIT · DOCKER · PYTHON · UV"/></section>
-<section className="chapter arsenal" id="skills"><img className={"summon "+(dark?"snake":"frog")} src={dark?"/assets/snake-summon-v4.png":"/assets/frog-summon-v4.png"} alt=""/><div className="chapter-label">03 / TOOLKIT</div><Heading kicker="ENGINEERING ARSENAL" title={<>Broad enough to build.<br/><em>Deep enough to ship.</em></>}/><div className="skill-constellation reveal">{[["LANGUAGES","C · C++ · Java · Python · SQL · Bash"],["FRONTEND / MERN","React.js · JavaScript · MERN · HTML · CSS"],["BACKEND / APIs","Spring Boot · Node.js · Express · FastAPI · RESTful APIs · JWT"],["AGENTIC AI","LangChain · LangGraph · RAG · Gemini · OpenCV · MediaPipe"],["DATA","MongoDB · PostgreSQL · Supabase · Redis · ChromaDB · Kafka"],["PLATFORM","Docker · Kubernetes · Git · GitHub · CI/CD"],["OBSERVABILITY","Grafana · Prometheus · Elasticsearch · Log4j2"],["DEVELOPER TOOLS","VS Code · Cursor · IntelliJ IDEA · PyCharm"]].map((s,i)=><div key={s[0]}><i>{String(i+1).padStart(2,"0")}</i><b>{s[0]}</b><p>{s[1]}</p></div>)}</div></section>
-<section className="chapter credentials" id="credentials"><div className="chapter-label">04 / CREDENTIALS</div><Heading kicker="TRAINING & RECOGNITION" title={<>Practice backed<br/><em>by proof.</em></>}/><div className="cert-grid">{certs.map((c,i)=><article className="cert reveal" key={c[1]}><span>{String(i+1).padStart(2,"0")}</span><small>{c[0]}</small><h3>{c[1]}</h3><p>{c[2]}</p><b>{dark?"蛇":"蛙"}</b></article>)}</div><div className="coding-record reveal"><div><span>COMPETITIVE PROGRAMMING</span><h3>1,500+ problems. Consistency over spectacle.</h3></div><div><b>1854</b><span>LEETCODE · KNIGHT · TOP 5%</span></div><div><b>1646</b><span>CODECHEF · 3 STAR</span></div><div><b>1320</b><span>CODEFORCES · PUPIL</span></div></div><div className="education reveal"><span>EDUCATION & LEADERSHIP</span><div><b>NIT RAIPUR</b><p>B.Tech CSE · 2022—2026 · CGPA 8.51/10</p></div><div><b>SRI CHAITANYA JR. COLLEGE</b><p>MPC · 2020—2022 · 97.7%</p></div><div><b>SANSKRITHI, NIT RAIPUR</b><p>Cultural Executive · 2023—Present</p></div></div></section>
-<section className="contact" id="contact"><div className="contact-guardian"><img src={dark?"/assets/susanoo-guardian-v3.png":"/assets/kurama-guardian-v3.png"} alt=""/></div><span>OPEN TO SOFTWARE ENGINEERING · AI ENGINEERING · AMBITIOUS COLLABORATIONS</span><h2>Build something<br/><em>worth remembering.</em></h2><p>If you are working on a difficult system or a useful AI product, I would like to hear about it.</p><a href="mailto:kotte.koushik5021@gmail.com">KOTTE.KOUSHIK5021@GMAIL.COM <b>↗</b></a><div className="socials"><a href="https://github.com/Koushikroyal2005/" target="_blank" rel="noreferrer">GITHUB</a><a href="https://www.linkedin.com/in/koushik-kotte/" target="_blank" rel="noreferrer">LINKEDIN</a><a href="https://leetcode.com/u/I_Can_Do_This_AAll_Day/" target="_blank" rel="noreferrer">LEETCODE</a><a href="https://codeforces.com/profile/kotte.koushik5021" target="_blank" rel="noreferrer">CODEFORCES</a></div></section><footer><span>© 2026 KOUSHIK KOTTE</span><span>ENGINEERED IN RAIPUR</span><a href="#top">BACK TO TOP ↑</a></footer></main>}
-function Heading({kicker,title,text}:{kicker:string,title:React.ReactNode,text?:string}){return <div className="section-heading reveal"><div><span>{kicker}</span><h2>{title}</h2></div>{text&&<p>{text}</p>}</div>}
-function Role({number,date,location,role,company,unit,summary,items,metrics,stack}:{number:string,date:string,location:string,role:string,company:string,unit:string,summary:string,items:string[][],metrics:string[][],stack:string}){return <article className="role-card reveal"><div className="role-meta"><span>{date}</span><small>{location}</small><b>{number}</b></div><div className="role-body"><span>{role}</span><h3>{company} <em>· {unit}</em></h3><p className="role-summary">{summary}</p><div className="impact-grid">{items.map(([t,p])=><div className="impact-item" key={t}><i/><div><b>{t}</b><p>{highlightMetrics(p)}</p></div></div>)}</div><div className="role-metrics"><span>{company.toUpperCase()} IMPACT</span>{metrics.map(([value,label])=><div key={label}><b>{value}</b><small>{label}</small></div>)}</div><small className="stack">{stack}</small></div></article>}
-function highlightMetrics(text:string){return text.split(/(\d+(?:[.,–-]\d+)*(?:\+|%|x)?(?:\s*(?:FPS|logs\/second|minutes?|services?|APIs?|features?|test cases?|scenarios?|patterns?))?)/gi).map((part,i)=>/\d/.test(part)?<mark className="metric-highlight" key={i}>{part}</mark>:part)}
-type BrushPoint={x:number;y:number;t:number};
-function TrailReveal({src}:{src:string}){
-const canvasRef=useRef<HTMLCanvasElement>(null),maskRef=useRef<HTMLCanvasElement|null>(null),pointsRef=useRef<BrushPoint[]>([]),lastRef=useRef<BrushPoint|null>(null),srcRef=useRef(src),imagesRef=useRef<Record<string,HTMLImageElement>>({});
-useEffect(()=>{srcRef.current=src;pointsRef.current=[];lastRef.current=null;const canvas=canvasRef.current;if(canvas)canvas.getContext("2d")?.clearRect(0,0,canvas.width,canvas.height);if(maskRef.current)maskRef.current.getContext("2d")?.clearRect(0,0,maskRef.current.width,maskRef.current.height)},[src]);
-useEffect(()=>{
-const canvas=canvasRef.current;if(!canvas)return;
-const mask=document.createElement("canvas");maskRef.current=mask;
-for(const [key,url] of Object.entries({naruto:"/assets/naruto-aligned-v3.png",sasuke:"/assets/sasuke-aligned-v3.png"})){const image=new Image();image.src=url;imagesRef.current[key]=image}
-let frame=0;
-const draw=(now:number)=>{
-const rect=canvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2),w=Math.max(1,Math.round(rect.width*dpr)),h=Math.max(1,Math.round(rect.height*dpr));
-if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;mask.width=w;mask.height=h;pointsRef.current=[];lastRef.current=null}
-const ctx=canvas.getContext("2d"),brush=mask.getContext("2d");if(!ctx||!brush){frame=requestAnimationFrame(draw);return}
-const life=1150;pointsRef.current=pointsRef.current.filter(point=>now-point.t<life);
-brush.clearRect(0,0,w,h);brush.lineCap="round";brush.lineJoin="round";
-const points=pointsRef.current;
-if(points.length===1){const alpha=Math.max(0,1-(now-points[0].t)/life);brush.globalAlpha=alpha;brush.fillStyle="#fff";brush.beginPath();brush.arc(points[0].x*dpr,points[0].y*dpr,48*dpr,0,Math.PI*2);brush.fill()}
-for(let i=1;i<points.length;i++){const a=points[i-1],b=points[i],alpha=Math.max(0,1-(now-b.t)/life);brush.strokeStyle="#fff";brush.globalAlpha=alpha*.28;brush.lineWidth=118*dpr;brush.beginPath();brush.moveTo(a.x*dpr,a.y*dpr);brush.lineTo(b.x*dpr,b.y*dpr);brush.stroke();brush.globalAlpha=alpha;brush.lineWidth=88*dpr;brush.beginPath();brush.moveTo(a.x*dpr,a.y*dpr);brush.lineTo(b.x*dpr,b.y*dpr);brush.stroke()}
-brush.globalAlpha=1;ctx.clearRect(0,0,w,h);
-const key=srcRef.current.includes("sasuke")?"sasuke":"naruto",image=imagesRef.current[key];
-if(image?.complete&&image.naturalWidth){const scale=Math.max(w/image.naturalWidth,h/image.naturalHeight),dw=image.naturalWidth*scale,dh=image.naturalHeight*scale;ctx.globalCompositeOperation="source-over";ctx.drawImage(image,(w-dw)/2,0,dw,dh);ctx.globalCompositeOperation="destination-in";ctx.drawImage(mask,0,0);ctx.globalCompositeOperation="source-over"}
-frame=requestAnimationFrame(draw)};
-frame=requestAnimationFrame(draw);return()=>cancelAnimationFrame(frame)},[]);
-const paint=(e:React.PointerEvent<HTMLCanvasElement>)=>{const rect=e.currentTarget.getBoundingClientRect(),now=performance.now(),next={x:e.clientX-rect.left,y:e.clientY-rect.top,t:now},last=lastRef.current;if(last){const distance=Math.hypot(next.x-last.x,next.y-last.y),steps=Math.max(1,Math.ceil(distance/12));for(let i=1;i<=steps;i++){const mix=i/steps;pointsRef.current.push({x:last.x+(next.x-last.x)*mix,y:last.y+(next.y-last.y)*mix,t:now})}}else pointsRef.current.push(next);if(pointsRef.current.length>110)pointsRef.current.splice(0,pointsRef.current.length-110);lastRef.current=next};
-return <canvas ref={canvasRef} className="trail-canvas brush-trail" onPointerEnter={paint} onPointerMove={paint} onPointerLeave={()=>{lastRef.current=null}} aria-hidden="true"/>}
+
+import { useEffect, useRef, useState } from "react";
+import {
+  ContactSection,
+  CredentialsSection,
+  ExperienceSection,
+  Hero,
+  SiteHeader,
+  SkillsSection,
+  WorkSection,
+} from "./components/PortfolioSections";
+import type { Theme } from "./data/portfolio";
+
+export default function Home() {
+  const [theme, setTheme] = useState<Theme>("naruto");
+  const [ready, setReady] = useState(false);
+  const [switching, setSwitching] = useState(false);
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const dark = theme === "sasuke";
+
+  useEffect(() => {
+    setTheme(localStorage.getItem("portfolio-theme") === "sasuke" ? "sasuke" : "naruto");
+    const timer = setTimeout(() => setReady(true), 650);
+    const move = (event: PointerEvent) => {
+      cursorRef.current?.style.setProperty("--cx", event.clientX + "px");
+      cursorRef.current?.style.setProperty("--cy", event.clientY + "px");
+      document.documentElement.style.setProperty("--px", String(event.clientX / innerWidth - 0.5));
+      document.documentElement.style.setProperty("--py", String(event.clientY / innerHeight - 0.5));
+    };
+    const scroll = () => document.documentElement.style.setProperty("--progress", String(scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight)));
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("in-view")),
+      { threshold: 0.12 },
+    );
+    document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+    addEventListener("pointermove", move);
+    addEventListener("scroll", scroll, { passive: true });
+    scroll();
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+      removeEventListener("pointermove", move);
+      removeEventListener("scroll", scroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("portfolio-theme", theme);
+  }, [theme]);
+
+  const changeTheme = (next: Theme) => {
+    if (next === theme) return;
+    setSwitching(true);
+    setTimeout(() => setTheme(next), 260);
+    setTimeout(() => setSwitching(false), 850);
+  };
+
+  return (
+    <main className={"site " + (ready ? "ready" : "")}>
+      <div className="boot"><div className="boot-mark"><i/><b>{dark ? "雷" : "火"}</b></div><span>LOADING FIELD NOTES</span></div>
+      <div className={"theme-strike " + (switching ? "active" : "")}><i/><b>{dark ? "火" : "雷"}</b></div>
+      <div className="grain"/><div className="progress"/>
+      <div className="leaf-cursor" ref={cursorRef}><img src="/assets/leaf-cursor-v4.png" alt=""/><span/></div>
+      <SiteHeader dark={dark} onThemeChange={changeTheme}/>
+      <Hero dark={dark}/>
+      <WorkSection dark={dark}/>
+      <ExperienceSection dark={dark}/>
+      <SkillsSection dark={dark}/>
+      <CredentialsSection dark={dark}/>
+      <ContactSection dark={dark}/>
+    </main>
+  );
+}

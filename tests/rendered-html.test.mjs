@@ -41,8 +41,10 @@ test("server-renders Koushik's portfolio", async () => {
 });
 
 test("ships the required portfolio assets and metadata", async () => {
-  const [page, layout, css, portrait] = await Promise.all([
+  const [page, sections, trail, layout, css, portrait] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/PortfolioSections.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/TrailReveal.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../public/assets/koushik-pose-v2.png", import.meta.url)),
@@ -64,14 +66,14 @@ test("ships the required portfolio assets and metadata", async () => {
   assert.match(page, /localStorage\.setItem\("portfolio-theme"/);
   assert.match(css, /konoha-panorama-v3\.png/);
   assert.match(css, /uchiha-chamber-v3\.png/);
-  assert.match(page, /TrailReveal/);
-  assert.match(page, /href="#skills">SKILLS/);
-  assert.match(page, /href="#credentials">CERTIFICATIONS/);
-  assert.match(page, /signal-sequence/);
+  assert.match(sections, /TrailReveal/);
+  assert.match(sections, /href="#skills">SKILLS/);
+  assert.match(sections, /href="#credentials">CERTIFICATIONS/);
+  assert.match(sections, /signal-sequence/);
   assert.match(css, /translateX\(calc\(50vw - 50%\)\)/);
-  assert.match(page, /brush-trail/);
-  assert.match(page, /destination-in/);
-  assert.match(page, /const life=1150/);
+  assert.match(trail, /brush-trail/);
+  assert.match(trail, /destination-in/);
+  assert.match(trail, /const life = 1150/);
   assert.match(page, /leaf-cursor-v4\.png/);
   assert.match(css, /\.brush-trail\{cursor:none;will-change:contents\}/);
   assert.match(css, /\.leaf-cursor>span\{display:none!important\}/);
