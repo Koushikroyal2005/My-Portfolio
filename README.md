@@ -13,6 +13,12 @@ Open the local URL shown in the terminal.
 
     npm test
 
+## Static deployment
+
+    npm run build:static
+
+The Netlify-ready output is generated in dist/client.
+
 ## Project structure
 
 - app/components/ — reusable portfolio sections and interactions
