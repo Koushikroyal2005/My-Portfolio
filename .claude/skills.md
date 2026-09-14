@@ -8,11 +8,12 @@ Use this file as the canonical brief and content source for every portfolio edit
 - Light mode: warm parchment, Konoha skyline, ramen-shop warmth, leaf motifs, Naruto/Kurama energy, orange chakra.
 - Dark mode: Uchiha stone chamber, moonlit indigo, Akatsuki cloud accents, Sasuke/Susanoo energy, electric blue and violet chakra.
 - Theme switching must transform backgrounds, creature motifs, cursor, effects, labels, and scene atmosphere - not only colors.
-- Use the Leaf Village forehead-protector emblem as the desktop cursor. It must remain upright and must never rotate.
+- Use the exact Leaf Village forehead-protector emblem as the desktop cursor, permanently rotated 90 degrees clockwise so its silhouette reads like a pointer. It must not animate or spin. Sasuke dark mode uses the same emblem with a diagonal strike through it.
 - Use kunai as bullet markers and a spinning shuriken as the visual transition between major chapters.
-- Use frogs subtly in light mode and snakes subtly in dark mode.
+- Place a small summon in the top-right of the engineering toolkit: a frog that gently hops in Naruto light mode and a purple snake that slowly crawls in Sasuke dark mode.
 - Hero portrait: Koushik looking directly at the viewer, arms crossed, with Naruto and Sasuke layers sharing the same centered pose and framing. Cursor movement over the portrait must reveal the complete alternate character and its background through a soft motion trail. Fresh trail areas open under the cursor while older areas smoothly close and refill with Koushik's original portrait. The reveal is not limited to the face and must not be a fixed circular lens.
 - Kurama and Susanoo must appear as large, unmistakable atmospheric guardians behind/around the hero or chapter transition, not as text labels.
+- Keep the guardian slightly smaller than the portrait, clearly visible just left of the portrait and vertically centered. Kurama must use clean Naruto-style 2D cel shading rather than a realistic or generic AI-fantasy fox.
 - Motion: smooth scene reveals, depth/parallax, chakra particles, cloud drift, scroll progress, character face reveal, shuriken transition, and restrained hover microinteractions. Respect prefers-reduced-motion.
 - Copy tone: professional, specific, restrained. Avoid generic anime dialogue, ranks, filler slogans, or roleplay language that could distract recruiters.
 
@@ -35,7 +36,8 @@ Koushik Kotte is a Computer Science and Engineering undergraduate at NIT Raipur 
 
 Software Development Engineer Intern - Bangalore, onsite - Jan 2026 to Jun 2026
 
-- Reduced PBS manual testing from multiple days to about 5 minutes by building MTest automation for 300-400 tests across five microservices; also fixed margin-check failures through IBIS validation to prevent purchase-order failures.
+- Built an integration-testing tool that automated 300-400 test cases across 10 services and scheduled daily cron test runs, reducing PBS manual testing from multiple days to about 5 minutes.
+- Diagnosed and fixed margin-check and IBIS validation defects across two services, preventing purchase-order failures and making the automated integration flow reliable.
 - Increased logging capacity from roughly 600 to 7,000 logs per second (12x) and reduced request latency by up to 10% across seven services by migrating Log4j2 to a custom LMAX Disruptor ring-buffer implementation.
 - Reduced incident-detection time from about 30 minutes to 5 minutes (80%) and cut on-call escalations by 40% by building unified Grafana and Prometheus dashboards for roughly 20 external APIs.
 - Reduced IBIS/Hydra cache latency by 90-95% through an in-memory cache migration; built a parallel Bash utility for Redis key deletion that reduced cleanup to under one minute.
@@ -49,6 +51,7 @@ AI Evaluation Specialist - Remote - Jul 2026 to Aug 2026
 - Designed more than 10 terminal-based debugging, repository-repair, and multi-step scenarios that tested AI-agent reasoning and code execution beyond basic generation.
 - Evaluated more than 20 recurring AI failure patterns and delivered structured feedback to improve quality, fairness, and robustness of software-engineering benchmarks.
 - Iterated through review cycles to correct verifier behavior, instruction clarity, and task difficulty, improving benchmark acceptance readiness.
+- Strengthened acceptance readiness by separating task-authoring issues from genuine model failures and documenting actionable corrections for each review cycle.
 - Stack: GitHub CLI, Git, Docker, Python, UV.
 
 ## Selected projects
@@ -90,3 +93,10 @@ AI Evaluation Specialist - Remote - Jul 2026 to Aug 2026
 - Project presentations must feel distinct, with different compositions and motifs rather than identical cards.
 - Avoid long paragraphs. Use layered disclosure for detail.
 - Validate desktop and mobile rendering, both themes, keyboard controls, hover face reveal, and reduced-motion behavior before delivery.
+
+## Additional verified skills
+
+- Frontend/full stack: React.js, MERN, RESTful APIs.
+- Backend/AI: FastAPI, LangChain, LangGraph, ChromaDB.
+- Databases/platforms: MongoDB, PostgreSQL, Supabase.
+- Developer environments: VS Code, Cursor, IntelliJ IDEA, PyCharm.

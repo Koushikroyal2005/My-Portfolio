@@ -32,7 +32,11 @@ test("server-renders Koushik's portfolio", async () => {
   assert.match(html, /Machine Learning Specialization/);
   assert.match(html, /600 → 7K/);
   assert.match(html, /30 → 5 MIN/);
-  assert.match(html, /300-400 tests across five microservices/);
+  assert.match(html, /300-400/);
+  assert.match(html, /10 services/);
+  assert.match(html, /FastAPI/);
+  assert.match(html, /LangGraph/);
+  assert.match(html, /Supabase/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
 
@@ -48,6 +52,10 @@ test("ships the required portfolio assets and metadata", async () => {
     access(new URL("../public/assets/uchiha-chamber-v3.png", import.meta.url)),
     access(new URL("../public/assets/kurama-guardian-v3.png", import.meta.url)),
     access(new URL("../public/assets/susanoo-guardian-v3.png", import.meta.url)),
+    access(new URL("../public/assets/kurama-guardian-v4.png", import.meta.url)),
+    access(new URL("../public/assets/leaf-cursor-v4.png", import.meta.url)),
+    access(new URL("../public/assets/frog-summon-v4.png", import.meta.url)),
+    access(new URL("../public/assets/snake-summon-v4.png", import.meta.url)),
     access(new URL("../.claude/skills.md", import.meta.url)),
     access(new URL("../public/Koushik-Kotte-Resume.pdf", import.meta.url)),
     access(new URL("../public/og.png", import.meta.url)),
