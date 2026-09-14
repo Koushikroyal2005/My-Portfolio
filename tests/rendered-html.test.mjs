@@ -65,6 +65,10 @@ test("ships the required portfolio assets and metadata", async () => {
   assert.match(css, /konoha-panorama-v3\.png/);
   assert.match(css, /uchiha-chamber-v3\.png/);
   assert.match(page, /TrailReveal/);
+  assert.match(page, /href="#skills">SKILLS/);
+  assert.match(page, /href="#credentials">CERTIFICATIONS/);
+  assert.match(page, /signal-sequence/);
+  assert.match(css, /translateX\(calc\(50vw - 50%\)\)/);
   assert.match(page, /brush-trail/);
   assert.match(page, /destination-in/);
   assert.match(page, /const life=1150/);
