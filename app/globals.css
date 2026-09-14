@@ -55,4 +55,9 @@
 .leaf-cursor>span{position:absolute;z-index:2;left:-2px;top:15px;width:39px;height:4px;border-radius:4px;background:#eee9ff;box-shadow:0 0 4px #5f3cff,0 0 9px #896cff;opacity:0;transform:rotate(-28deg);transition:opacity .25s}
 .leaf-cursor>span:after{content:"";position:absolute;left:4px;top:7px;width:33px;height:2px;border-radius:3px;background:#a78dff;box-shadow:0 0 5px #6b44ff}
 [data-theme="sasuke"] .leaf-cursor>span{opacity:1}
+.leaf-cursor>span{display:none!important}
+.trail-reveal{--reveal-x:50%;--reveal-y:36%;position:absolute;z-index:4;inset:0;width:100%;height:100%;touch-action:none}
+.trail-reveal img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0;clip-path:circle(150px at var(--reveal-x) var(--reveal-y));filter:saturate(1.1) contrast(1.04);transition:opacity .1s linear;pointer-events:none}
+.trail-reveal[data-active="true"] img.active{opacity:1}
+.portrait:hover .trail-hint{opacity:.18}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.boot{display:none}.reveal{opacity:1;transform:none}}
