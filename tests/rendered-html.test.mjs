@@ -66,7 +66,9 @@ test("ships the required portfolio assets and metadata", async () => {
   assert.match(css, /uchiha-chamber-v3\.png/);
   assert.match(page, /TrailReveal/);
   assert.match(page, /destination-in/);
-  assert.match(css, /\.leaf-cursor i\{animation:none/);
+  assert.match(page, /leaf-cursor-v4\.png/);
+  assert.match(css, /\.leaf-cursor>span/);
+  assert.match(css, /\[data-theme="sasuke"\] \.leaf-cursor>span/);
   assert.match(layout, /AI Engineer & Full-Stack Developer/);
   assert.match(layout, /openGraph/);
 });

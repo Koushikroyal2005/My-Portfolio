@@ -47,4 +47,12 @@
 @keyframes snake-crawl{0%,100%{transform:translateX(0) rotate(-2deg)}25%{transform:translateX(-24px) rotate(2deg)}50%{transform:translateX(-8px) rotate(-1deg)}75%{transform:translateX(-34px) rotate(3deg)}}
 @media(max-width:980px){.guardian{left:-12%;top:7%;width:78%;height:78%}.skill-constellation{grid-template-columns:repeat(2,1fr)}.role-metrics{grid-template-columns:repeat(2,1fr);gap:18px}.role-metrics>span{grid-column:1/-1}.role-metrics>div{border-left:0;border-top:1px solid color-mix(in srgb,var(--bg) 18%,transparent);padding:14px 0 0}}
 @media(max-width:620px){.guardian{left:-23%;top:8%;width:82%;height:82%}.summon{right:8px;top:32px;width:115px;height:95px}.summon.snake{width:100px;height:125px;top:20px}.arsenal .section-heading{padding-right:90px}.skill-constellation{grid-template-columns:1fr}.role-metrics{padding:18px}}
+.leaf-cursor{background:none;filter:none}
+.leaf-cursor>img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:invert(48%) sepia(98%) saturate(3250%) hue-rotate(355deg) brightness(102%) contrast(94%);transition:filter .35s}
+[data-theme="sasuke"] .leaf-cursor{filter:none}
+[data-theme="sasuke"] .leaf-cursor>img{filter:invert(58%) sepia(82%) saturate(3395%) hue-rotate(224deg) brightness(101%) contrast(101%)}
+.leaf-cursor:after{display:none}
+.leaf-cursor>span{position:absolute;z-index:2;left:-2px;top:15px;width:39px;height:4px;border-radius:4px;background:#eee9ff;box-shadow:0 0 4px #5f3cff,0 0 9px #896cff;opacity:0;transform:rotate(-28deg);transition:opacity .25s}
+.leaf-cursor>span:after{content:"";position:absolute;left:4px;top:7px;width:33px;height:2px;border-radius:3px;background:#a78dff;box-shadow:0 0 5px #6b44ff}
+[data-theme="sasuke"] .leaf-cursor>span{opacity:1}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.boot{display:none}.reveal{opacity:1;transform:none}}
